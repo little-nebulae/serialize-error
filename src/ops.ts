@@ -1,16 +1,17 @@
 import type { BaseErrorType } from "@little-nebulae/error";
 
-import type { ErrorObjectMeta } from "@/schemas";
-import type { FlatErrorObject } from "@/types";
-
-import { ErrorObjectMetaSchema } from "@/schemas";
+import type { ErrorObjectMeta, FlatErrorObject } from "@/types";
 
 export function serializeErrorShallowly<
   TCode extends string,
-  TMeta extends ErrorObjectMeta = null,
->({ error }: { error: BaseErrorType<TCode> }): FlatErrorObject<TCode, TMeta> {
-  const meta = ErrorObjectMetaSchema.parse(error.meta) as TMeta;
-
+  TMeta extends ErrorObjectMeta,
+>({
+  error,
+  meta,
+}: {
+  error: BaseErrorType<TCode>;
+  meta: TMeta;
+}): FlatErrorObject<TCode, TMeta> {
   return {
     name: error.name,
     message: error.message,

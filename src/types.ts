@@ -2,7 +2,7 @@ import type { BaseErrorType } from "@little-nebulae/error";
 import type { OmitKnownKeys } from "@little-nebulae/type-utils";
 import type { JSONType } from "zod";
 
-import type { ErrorObjectMeta } from "@/schemas";
+export type ErrorObjectMeta = Record<string, JSONType> | null;
 
 export interface FlatErrorObject<
   TCode extends string,
